@@ -1,0 +1,314 @@
+/* app/globals.css */
+/* 🌟 MODERN CHATGPT THEME */
+
+@import "tailwindcss";
+
+@theme {
+    --color-brand-bg: var(--background);
+    --color-brand-emerald: var(--color-green);
+    --color-brand-text: var(--foreground);
+    --color-brand-gold: var(--color-gold);
+    --color-brand-sidebar: var(--sidebar-bg);
+}
+
+:root {
+    /* ========================================= */
+    /* 🎨 BASE COLORS - TEMEL RENKLER (RGB)     */
+    /* Modern ChatGPT Theme                     */
+    /* ========================================= */
+
+    /* Ana Gri - Dark Gray (Kutular için) */
+    --color-green: #40414F;
+    --color-green-rgb: 64, 65, 79;
+    --color-green-light: #565869;
+    --color-green-dark: #343541;
+    --color-green-deep: #202123;
+
+    /* Açık Gri - Light Gray (Vurgular için) */
+    --color-gold: #565869;
+    --color-gold-rgb: 86, 88, 105;
+    --color-gold-light: #6E6F7E;
+    --color-gold-cream: #ECECF1;
+    --color-gold-warm: #8E8EA0;
+    --color-gold-deep: #444654;
+
+    /* Beyaz & Koyu Tonlar */
+    --color-white: #ffffff;
+    --color-white-rgb: 255, 255, 255;
+    --color-cream: #FFFEF7;
+    --color-cream-rgb: 255, 254, 247;
+
+    /* Arka Plan Tonları - Dark Gray Shades */
+    --color-dark: #343541;
+    --color-dark-rgb: 52, 53, 65;
+    --color-dark-light: #40414F;
+    --color-dark-lighter: #444654;
+    --color-dark-deep: #2A2B32;
+    --color-dark-deepest: #202123;
+
+    /* Tehlike / Hata - Danger */
+    --color-danger: #C62828;
+    --color-danger-rgb: 198, 40, 40;
+    --color-danger-dark: #B71C1C;
+
+    /* Koyu Metin - Dark Text */
+    --color-black: #1a1a1a;
+    --color-black-rgb: 26, 26, 26;
+
+    /* ========================================= */
+    /* GLOBAL / GENEL RENKLER                   */
+    /* ========================================= */
+    --background: #343541;
+    --foreground: #ECECF1;
+
+    /* ========================================= */
+    /* SIDEBAR - SOL MENÜ (Koyu Yeşil)          */
+    /* ========================================= */
+    --sidebar-bg: var(--color-green-deep);
+    --sidebar-bg-hover: var(--color-green-dark);
+    --sidebar-text: var(--color-cream);
+    --sidebar-text-muted: rgba(var(--color-cream-rgb), 0.7);
+    --sidebar-border: rgba(var(--color-gold-rgb), 0.4);
+    --sidebar-item-hover: rgba(var(--color-gold-rgb), 0.2);
+    --sidebar-item-active: rgba(var(--color-gold-rgb), 0.35);
+    --sidebar-icon: var(--color-gold);
+
+    /* ========================================= */
+    /* INPUT - GİRİŞ KUTULARI (Yeşil Tonlu)     */
+    /* ========================================= */
+    --input-bg: var(--color-green);
+    --input-text: var(--color-cream);
+    --input-placeholder: rgba(var(--color-cream-rgb), 0.6);
+    --input-border: rgba(var(--color-gold-rgb), 0.6);
+    --input-border-focus: var(--color-gold);
+    --input-shadow: rgba(var(--color-gold-rgb), 0.4);
+
+    /* ========================================= */
+    /* OUTPUT / AI MESSAGES - ÇIKTI KUTULARI    */
+    /* ========================================= */
+    --output-ai-bg: var(--color-green);
+    --output-ai-text: var(--color-cream);
+    --output-ai-border: rgba(var(--color-gold-rgb), 0.5);
+
+    /* ========================================= */
+    /* USER MESSAGES - KULLANICI MESAJLARI      */
+    /* ========================================= */
+    --output-user-bg: var(--color-green-light);
+    --output-user-text: var(--color-cream);
+    --output-user-border: rgba(var(--color-gold-rgb), 0.6);
+
+    /* ========================================= */
+    /* BUTTONS - BUTONLAR                       */
+    /* ========================================= */
+    --button-primary-bg: var(--color-green);
+    --button-primary-text: var(--color-cream);
+    --button-primary-hover: var(--color-green-dark);
+    --button-primary-border: rgba(var(--color-gold-rgb), 0.5);
+
+    --button-secondary-bg: transparent;
+    --button-secondary-text: var(--color-green);
+    --button-secondary-border: var(--color-green);
+    --button-secondary-hover: rgba(var(--color-green-rgb), 0.1);
+
+    --button-danger-bg: var(--color-danger);
+    --button-danger-text: var(--color-white);
+    --button-danger-hover: var(--color-danger-dark);
+
+    /* ========================================= */
+    /* HEADER - ÜST MENÜ                        */
+    /* ========================================= */
+    --header-bg: transparent;
+    --header-text: var(--color-white);
+    --header-icon: var(--color-gold);
+
+    /* ========================================= */
+    /* TYPOGRAPY - YAZILAR                      */
+    /* ========================================= */
+    --text-primary: var(--color-white);
+    --text-secondary: rgba(var(--color-white-rgb), 0.9);
+    --text-muted: rgba(var(--color-white-rgb), 0.7);
+    --text-heading: var(--color-gold);
+    --text-link: var(--color-gold-light);
+    --text-link-hover: var(--color-gold);
+
+    /* ========================================= */
+    /* CARDS & CONTAINERS - KARTLAR (Yeşil)     */
+    /* ========================================= */
+    --card-bg: var(--color-green);
+    --card-border: rgba(var(--color-gold-rgb), 0.4);
+    --card-shadow: rgba(var(--color-green-rgb), 0.25);
+
+    /* ========================================= */
+    /* LOADING & STATES - DURUMLAR              */
+    /* ========================================= */
+    --loading-dot: var(--color-green);
+    --success: var(--color-green);
+    --warning: var(--color-gold-deep);
+    --error: var(--color-danger);
+}
+
+/* Dark Theme Override */
+[data-theme="dark"] {
+    --background: #1a1f2e;
+    --foreground: #e5e7eb;
+
+    --color-dark: #1a1f2e;
+    --color-dark-rgb: 26, 31, 46;
+    --color-dark-light: #242b3d;
+    --color-dark-lighter: #2d364a;
+    --color-dark-deep: #151926;
+    --color-dark-deepest: #0f1219;
+
+    /* Green Variables Remapped to Grayscale for 'No-Green' Dark Mode */
+    --color-green: #343541;
+    /* Matches ChatGPT Dark Gray */
+    --color-green-light: #444654;
+    /* Slightly lighter gray */
+    --color-green-dark: #2A2B32;
+    /* Darker gray */
+    --color-green-deep: #202123;
+    /* Deepest black/gray */
+
+    --color-gold: #ECECF1;
+    /* Neutral Text Color */
+    --color-gold-light: #D1D5DB;
+    --color-gold-cream: #F3F4F6;
+    --color-gold-warm: #9CA3AF;
+
+    --sidebar-bg: #202123;
+    /* ChatGPT Sidebar Black */
+    --input-box-bg: #40414F;
+    --output-ai-bg: #444654;
+    --output-user-bg: transparent;
+    /* No tint for user messages */
+
+    --text-primary: #ECECF1;
+    --text-secondary: #C5C5D2;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+}
+
+/* ============================================ */
+/* GOLD TEXTURE EXPERIMENT (COMMENTED OUT)     */
+/* ============================================ */
+/* body {
+    background: url('/gold-texture.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--foreground);
+} */
+
+/* Override Tailwind bg-brand-bg to show body texture */
+/* .bg-brand-bg {
+    background-color: transparent !important;
+    background-image: none !important;
+} */
+
+@keyframes metallic-shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ------------------------------------------- */
+/* VANILLA CSS SCROLLBAR HİLESİ (Tüm Tarayıcılar İçin) */
+/* ------------------------------------------- */
+
+/* 1. TÜM ELEMENTLERİ HEDEFLEYEN GENİŞLİK */
+/* !important kullanarak genişliği uygulamaya zorluyoruz. */
+::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+    background: transparent !important;
+}
+
+/* 2. Çubuğun arkasındaki zemin (Track) */
+::-webkit-scrollbar-track {
+    background: transparent !important;
+    margin: 0 !important;
+}
+
+/* 3. Çubuğun kendisi (Thumb) - Sağa tam yapışık */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    border: 0px solid transparent !important;
+    background-clip: padding-box !important;
+}
+
+/* 4. Çubuk üzerine gelindiğinde renk değişimi */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 5. FIREFOX İÇİN UYUMLULUK */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
+}
+
+/* ------------------------------------------- */
+/* ANİMASYONLAR */
+/* ------------------------------------------- */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 0.3s ease-out;
+}
+
+/* ------------------------------------------- */
