@@ -26,9 +26,9 @@ PORT=8000
 # PostgreSQL bağlantısı - Docker kullanıyorsanız varsayılan değerleri kullanabilirsiniz
 POSTGRESQL_HOST=localhost
 POSTGRESQL_PORT=5432
-POSTGRESQL_DATABASE=bediralvesil_db
-POSTGRESQL_USERNAME=postgres
-POSTGRESQL_PASSWORD=postgres123
+POSTGRESQL_DATABASE=your_database_name
+POSTGRESQL_USERNAME=your_username
+POSTGRESQL_PASSWORD=your_secure_password
 
 # JWT
 JWT_SECRET=change-me
