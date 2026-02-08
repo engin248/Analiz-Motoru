@@ -369,6 +369,37 @@ async def scrape_ultra_v7():
                         console.print(f"[green]💾 DB İşlemi Tamam: {db_product.name[:20]}...[/green]")
                         console.print(f"[green]✅ Fiyat: {price} TL | ⭐{data.get('rating')} | ♥{data.get('favs')}[/green]")
                         
+                        # --- 3. SYSTEM LOG KAYDI (YENİ) ---
+                        from src.models_log import SystemLog
+                        
+                        action_msg = f"Güncellendi: {db_product.name[:30]}... ({price} TL)"
+                        if not existing_metric:
+                            action_msg = f"Yeni Eklendi: {db_product.name[:30]}... ({price} TL)"
+                            
+                        new_log = SystemLog(
+                            bot_name="Kazıyıcı-Bot-1",
+                            level="INFO",
+                            message=f"ID:{db_product.id} | {action_msg}"
+                        )
+                        db.add(new_log)
+                        db.commit()
+                        # --------------------------------
+                        
+                    except Exception as e:
+                        console.print(f"[red]❌ DB Yazma Hatası: {e}[/red]")
+                        
+                        # Hata Logu
+                        from src.models_log import SystemLog
+                        err_log = SystemLog(
+                            bot_name="Kazıyıcı-Bot-1",
+                            level="ERROR",
+                            message=f"ID:{db_product.id} HATA: {str(e)[:100]}"
+                        )
+                        db.add(err_log)
+                        db.commit()
+                        
+                        db.rollback()
+                        
                     except Exception as e:
                         console.print(f"[red]❌ DB Yazma Hatası: {e}[/red]")
                         db.rollback()
