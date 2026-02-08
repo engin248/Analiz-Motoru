@@ -1,0 +1,20 @@
+# Logs and process files
+bot_pid.txt
+bot_output.log
+bot_cumulative_seconds.txt
+*.log
+
+# Environments
+.env
+.venv/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS
+.DS_Store
+Thumbs.db
