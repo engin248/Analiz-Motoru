@@ -1,0 +1,32 @@
+# Aktif platformlar
+platforms:
+  trendyol:
+    enabled: true
+    keywords: ["elbise"]
+    max_pages: 50
+    max_products: 0  # Sınırsız ürün
+  
+  amazon:
+    enabled: false
+    keywords: ["dress"]
+    max_pages: 5
+
+# Veritabanı ayarları - Her platform için ayrı DB tanımlanabilir
+# Hassas bilgiler .env'den okunur
+databases:
+  trendyol:
+    name: bediralvesil_db
+    table: scraped_products
+  
+  amazon:
+    name: bediralvesil_db
+    table: scraped_products
+
+# Genel ayarlar
+settings:
+  headless: true
+  loop_enabled: true
+  loop_interval_minutes: 10
+  request_delay: 2
+  scroll_count: 5
+  retry_count: 3

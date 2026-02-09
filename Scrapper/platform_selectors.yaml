@@ -1,0 +1,77 @@
+# Platform-specific CSS selectors and URL patterns
+
+trendyol:
+  # URL yapısı
+  search_url: "https://www.trendyol.com/sr?q={keyword}&pi={page}"
+  product_id_pattern: "-p-(\\d+)"
+  
+  # Ürün listesi selectors
+  listing:
+    product_card: 
+      - "div.p-card-wrppr a"
+      - "div[data-testid='product-card'] a"
+      - ".product-card a"
+      - "a[href*='-p-']"
+    product_link_contains: "-p-"
+  
+  # Ürün detay sayfası selectors
+  product:
+    brand:
+      - "a.brand-link"
+      - ".brand-name"
+    name:
+      - "h1.product-title span"
+      - "h1.product-title"
+    price:
+      - ".prc-dsc"
+      - ".discounted"
+      - ".product-price"
+    original_price:
+      - ".prc-org"
+      - ".original"
+    rating:
+      - ".rating-score"
+      - ".pr-rnv-rating-score"
+    review_count:
+      - ".total-review-count"
+      - ".reviews-summary-reviews-detail"
+    image:
+      - ".product-slide img"
+      - ".gallery-container img"
+      - ".base-product-image img"
+    social_proof:
+      - ".social-proof-content"
+
+amazon:
+  # URL yapısı
+  search_url: "https://www.amazon.com.tr/s?k={keyword}&page={page}"
+  product_id_pattern: "/dp/([A-Z0-9]+)"
+  
+  # Ürün listesi selectors
+  listing:
+    product_card:
+      - "[data-component-type='s-search-result'] a.a-link-normal"
+      - ".s-result-item a.a-link-normal"
+    product_link_contains: "/dp/"
+  
+  # Ürün detay sayfası selectors
+  product:
+    brand:
+      - "#bylineInfo"
+      - ".po-brand .a-span9"
+    name:
+      - "#productTitle"
+    price:
+      - ".a-price .a-offscreen"
+      - "#priceblock_ourprice"
+      - "#priceblock_dealprice"
+    original_price:
+      - ".a-text-price .a-offscreen"
+    rating:
+      - "#acrPopover"
+      - ".a-icon-star-small"
+    review_count:
+      - "#acrCustomerReviewText"
+    image:
+      - "#landingImage"
+      - "#imgBlkFront"
