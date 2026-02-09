@@ -222,3 +222,21 @@ class DatabaseManager:
             if error:
                 item.error_msg = error
             session.commit()
+
+    def get_task_config(self, task_id: int):
+        """Görev ayarlarını çeker (max_pages vb.)"""
+        session = self.get_session()
+        task = session.query(ScrapingTask).filter(ScrapingTask.id == task_id).first()
+        if not task: return {}
+        
+        # Default değerler
+        config = {
+            "max_pages": 50,
+            "keywords": []
+        }
+        
+        if task.search_params:
+            if isinstance(task.search_params, dict):
+                config.update(task.search_params)
+        
+        return config

@@ -251,6 +251,12 @@ async def main():
                 console.print(f"[bold magenta]🎯 Hedef Kelime: {clean_kw}[/bold magenta]")
                 
                 # LOG BAŞLAT
+                # Task config oku
+                task_config = db_manager.get_task_config(args.task_id) if args.task_id else {}
+                if 'max_pages' in task_config:
+                    platform_config.max_pages = int(task_config['max_pages'])
+                    console.print(f"[bold yellow]⚙️ Task Ayarı: Max Sayfa = {platform_config.max_pages}[/bold yellow]")
+
                 log_id = db_manager.start_log(keyword=clean_kw, task_id=args.task_id, target_url=args.url)
                 
                 page_linker = await browser.new_page()
