@@ -1,20 +1,13 @@
-# Logs and process files
-bot_pid.txt
-bot_output.log
-bot_cumulative_seconds.txt
-*.log
-
-# Environments
-.env
+﻿node_modules/
 .venv/
-venv/
-ENV/
-
-# Python
 __pycache__/
-*.py[cod]
-*$py.class
-
-# OS
+*.pyc
+*.db
+*.log
+.env
+Scrapper/captures/
+Scrapper/static/captures/
+bot_*.pid
+bot_*.txt
+npm-debug.log
 .DS_Store
-Thumbs.db
