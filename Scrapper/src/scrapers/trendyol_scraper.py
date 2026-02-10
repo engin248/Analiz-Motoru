@@ -3,6 +3,7 @@ Trendyol Scraper - Platform-specific implementation
 """
 
 import asyncio
+from datetime import datetime
 from typing import Dict, List, Optional, Any
 from playwright.async_api import Page
 from rich.console import Console
@@ -114,22 +115,29 @@ class TrendyolScraper(BaseScraper):
 
         for page_num in range(1, max_pages + 1):
             url = f"{base_url}pi={page_num}"
-            console.print(f"[cyan]📄 Sayfa {page_num}/{max_pages} taranıyor...[/cyan]")
+            console.print(f"[cyan]📄 Sayfa {page_num}/{max_pages} taranıyor... URL: {url}[/cyan]")
             try:
-                await self.page.goto(url, wait_until='networkidle', timeout=60000)
-                await asyncio.sleep(2)
+                console.print(f"[dim]   - Sayfaya gidiliyor...[/dim]")
+                await self.page.goto(url, wait_until='domcontentloaded', timeout=30000)
+                console.print(f"[dim]   - Sayfa yüklendi, bekletiliyor...[/dim]")
+                await asyncio.sleep(3)
                 
                 # ÖZEL KONTROL: Bot tespiti veya Sonuç Bulunamadı ekranı mı?
                 is_blocked = await self.page.evaluate("""() => {
                     const text = document.body.innerText;
                     return text.includes('İlgili Sonuç Bulunamadı') || 
                            text.includes('Aradığınız sayfayı bulamadık') ||
-                           text.includes('Robot olmadığını doğrula');
+                           text.includes('Robot olmadığını doğrula') ||
+                           text.includes('Why have I been blocked') ||
+                           text.includes('Cloudflare');
                 }""")
                 if is_blocked:
+                    console.print(f"[bold red]   - BLOK GÖRÜLDÜ![/bold red]")
                     raise Exception("⛔ BLOKLANDI: Trendyol 'Sonuç Bulunamadı' veya doğrulama ekranı gösterdi.")
 
+                console.print(f"[dim]   - Sayfa kaydırılıyor...[/dim]")
                 await self.scroll_page()
+                console.print(f"[dim]   - Linkler toplanıyor...[/dim]")
                 links = await self.page.evaluate('''(args) => {
                     const selectors = args.selectors;
                     const linkContains = args.linkContains;
@@ -152,7 +160,12 @@ class TrendyolScraper(BaseScraper):
                     for l in links:
                         yield l
                 else:
-                    console.print(f"[yellow]⚠️ Sayfa {page_num}: Ürün bulunamadı[/yellow]")
+                    console.print(f"[yellow]⚠️ Sayfa {page_num}: Ürün bulunamadı. Ekran görüntüsü alınıyor...[/yellow]")
+                    import os
+                    os.makedirs("static/captures", exist_ok=True)
+                    filename = f"empty_page_{page_num}_{datetime.now().strftime('%H%M%S')}.png"
+                    try: await self.page.screenshot(path=f"static/captures/{filename}")
+                    except: pass
                     break
             except Exception as e:
                 console.print(f"[red]❌ Sayfa {page_num} hatası: {e}[/red]")
@@ -161,10 +174,11 @@ class TrendyolScraper(BaseScraper):
     async def scrape_product(self, url: str) -> Optional[Dict[str, Any]]:
         """Scrape a single Trendyol product page"""
         try:
-            await self.page.goto(url, wait_until='domcontentloaded', timeout=60000)
+            await self.page.goto(url, wait_until='domcontentloaded', timeout=30000)
             await self.page.mouse.wheel(0, 500)
-            await asyncio.sleep(3)
-        except:
+            await asyncio.sleep(2)
+        except Exception as e:
+            console.print(f"[red]❌ Ürün sayfasına gidilemedi ({url}): {e}[/red]")
             return None
         
         product_selectors = self.selectors.get('product', {})

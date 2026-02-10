@@ -10,17 +10,17 @@ def apply_styles():
         
         /* MERTİK KUTULARI (KARTLAR) */
         div[data-testid="stMetric"] {
-            background-color: #262730;
-            padding: 15px 10px;
-            border-radius: 10px;
-            border: 1px solid #41444C;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            min-height: 140px; /* Sabit Yükseklik */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* İçerik Yatayda Ortala */
+            background-color: #333333 !important; /* Belirgin Kutu Rengi */
+            padding: 15px 10px !important;
+            border-radius: 12px !important;
+            border: 1px solid #555555 !important;
+            text-align: center !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+            min-height: 120px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
         
         div[data-testid="stMetricLabel"] {
@@ -98,10 +98,11 @@ def apply_bot_card_styles():
     st.markdown("""
     <style>
         /* Streamlit'in kenarlıklı konteynerini (st.container border=True) yakalayıp beyaza çeviriyoruz */
+        /* Streamlit'in kenarlıklı konteynerini (st.container border=True) yakalayıp beyaza çeviriyoruz */
         div[data-testid="stVerticalBlockBorderWrapper"] {
-            border: 2px solid #FFFFFF !important;
+            border: 2px solid #333 !important;
             border-radius: 24px !important;
-            background-color: rgba(255, 255, 255, 0.03) !important;
+            background-color: #161616 !important; /* Lacivertliği kırmak için neredeyse siyah gri */
             padding: 2px !important;
         }
         
@@ -185,22 +186,23 @@ def apply_bot_card_styles():
         }
 
         .metric-pill-v8 {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: #262626; /* Inputlarla aynı renk */
+            border: 1px solid #444;
             padding: 15px;
             border-radius: 18px;
             text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); /* Hafif iç gölge ile derinlik */
         }
         .m-val-v8 { font-size: 22px; font-weight: 800; color: #00F5A0; line-height: 1; }
-        .m-lab-v8 { font-size: 9px; color: #555; font-weight: 700; margin-top: 6px; text-transform: uppercase; }
+        .m-lab-v8 { font-size: 9px; color: #888; font-weight: 700; margin-top: 6px; text-transform: uppercase; }
         
         .url-box-v8 {
             font-size: 9px; 
-            color: #666; 
-            background: rgba(0,0,0,0.3); 
+            color: #888;
+            background: #262626;  /* Inputlarla aynı renk */
             padding: 8px 12px; 
             border-radius: 10px; 
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid #444;
             margin: 15px 0;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -221,6 +223,44 @@ def apply_bot_card_styles():
 
         .plat-trendyol { background: #F27A1A; color: white; border: 1px solid #ff8a3d; }
         .plat-amazon { background: #FF9900; color: black; border: 1px solid #ffb340; }
-        .plat-other { background: #333; color: #888; border: 1px solid #444; }
+        /* Secondary Butonlar (Planla, Ayarlar, Uyarı) - Koyu Tema */
+        button[kind="secondary"] {
+            background-color: #262626 !important;
+            border: 1px solid #444 !important;
+            color: #E0E0E0 !important;
+            transition: all 0.2s ease;
+        }
+        button[kind="secondary"]:hover {
+            border-color: #666 !important;
+            background-color: #333 !important;
+            color: white !important;
+        }
+        
+        /* Ayarlar (Popover) butonu */
+        div[data-testid="stPopover"] > button {
+           background-color: #262626 !important;
+           border: 1px solid #444 !important;
+           color: #E0E0E0 !important;
+        }
+
+        /* UYARI BUTONU (Siyah ama ikon sarı/kırmızı olabilir) */
+        /* Normal secondary override yeterli */
+
+        /* INPUT ALANLARINI (Kutucukları) KART RENGİNE UYDURMA */
+        div[data-baseweb="select"] > div,
+        div[data-baseweb="base-input"],
+        .stTimeInput input,
+        .stTextInput input {
+            background-color: #262626 !important; /* Karttan biraz daha koyu */
+            border: 1px solid #444 !important;
+            color: white !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Dropdown ok işareti ve diğer ikonlar */
+        div[data-baseweb="select"] svg,
+        .stTimeInput svg {
+            fill: #888 !important;
+        }
     </style>
     """, unsafe_allow_html=True)

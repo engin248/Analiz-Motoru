@@ -26,8 +26,9 @@ class Product(Base):
     category = Column(String(200))
     category_tag = Column(String(200))
     attributes = Column(JSONB)
+    task_id = Column(Integer, ForeignKey("scraping_tasks.id"), nullable=True)
     
-    created_at = Column(DateTime, default=datetime.utcnow)
+    first_seen_at = Column(DateTime, default=datetime.utcnow)
     last_scraped_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     daily_metrics = relationship("DailyMetric", back_populates="product", cascade="all, delete-orphan")

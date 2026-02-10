@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from rich.console import Console
 
-from .models import Base, Product, DailyMetric, ScrapingLog, ScrapingQueue
+from .models import Base, Product, DailyMetric, ScrapingLog, ScrapingQueue, ScrapingTask
 
 console = Console()
 
@@ -68,7 +68,7 @@ class DatabaseManager:
                     brand=product_data.get('brand', ''),
                     name=product_data.get('name', ''),
                     image_url=product_data.get('image_url', ''),
-                    created_at=datetime.utcnow(),
+                    first_seen_at=datetime.utcnow(),
                     last_scraped_at=datetime.utcnow()
                 )
                 session.add(product)
@@ -240,3 +240,16 @@ class DatabaseManager:
                 config.update(task.search_params)
         
         return config
+
+    def reset_task_stats(self, task_id: int):
+        """Görev istatistiklerini (logları) temizler."""
+        session = self.get_session()
+        try:
+            # Sadece bu göreve ait logları sil
+            session.query(ScrapingLog).filter(ScrapingLog.task_id == task_id).delete()
+            # Kuyruğu da temizlemek isteyebiliriz ama şimdilik sadece istatistik
+            session.commit()
+            return True
+        except Exception:
+            session.rollback()
+            return False

@@ -1,8 +1,10 @@
-
+# Streamlit Main App - Schema fix - v3
 import os
 import sys
+# Streamlit Main App - Updated to fix imports
 import streamlit as st
 import time
+import threading
 
 # --- PATH CONFIG ---
 # Analiz_Motoru root dizinine erişim
@@ -14,9 +16,9 @@ if analiz_motoru_root not in sys.path:
     sys.path.insert(0, analiz_motoru_root)
 
 # Kendi modüllerimizi içe aktaralım
+from Admin_Panel.core.engine import start_permanent_scheduler, get_auth_hash
 from Admin_Panel.styles.main_styles import apply_styles, apply_login_styles
 from Admin_Panel.components.sidebar import render_sidebar
-from Admin_Panel.core.engine import start_permanent_scheduler, get_auth_hash
 
 # View modüllerini içe aktaralım
 from Admin_Panel.views.overview import render_overview
@@ -30,14 +32,19 @@ if "authenticated" not in st.session_state:
 st.set_page_config(
     page_title="Analiz Motoru - " + ("Dashboard" if st.session_state.get("authenticated") else "Giriş"),
     page_icon="🤖",
-    layout="wide" if st.session_state.get("authenticated") else "centered",
+    layout="wide",
     initial_sidebar_state="expanded" if st.session_state.get("authenticated") else "collapsed"
 )
+
+# --- SCHEDULER INITIALIZATION (CRITICAL: ROOT LEVEL) ---
+with open("MAIN_INIT.txt", "w") as f: f.write("STEP_REACHED")
+if not any(t.name == "SchedulerThread" for t in threading.enumerate()):
+    start_permanent_scheduler()
 
 # --- LOGIN SCREEN ---
 def login_screen():
     apply_login_styles()
-    c1, c2, c3 = st.columns([1, 2, 1])
+    c1, c2, c3 = st.columns([3, 2, 3])
     with c2:
         st.markdown('<div class="login-style"></div>', unsafe_allow_html=True)
         st.image("https://cdn-icons-png.flaticon.com/512/2593/2593491.png", width=90)
@@ -67,14 +74,6 @@ if not st.session_state["authenticated"]:
 else:
     if st.query_params.get("auth") != get_auth_hash():
         st.query_params["auth"] = get_auth_hash()
-
-# --- INITIALIZE CORE ---
-@st.cache_resource
-def init_engine():
-    start_permanent_scheduler()
-    return True
-
-init_engine()
 
 # --- MAIN APP ---
 apply_styles()
